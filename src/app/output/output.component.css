@@ -1,0 +1,9 @@
+table {
+    width: 100%;
+  }
+
+  .header-row {
+    display: inline-block; 
+    margin: 0; 
+    text-align: center;
+  }

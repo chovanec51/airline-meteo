@@ -1,0 +1,51 @@
+<form [formGroup]="form" (ngSubmit)="onCreateBriefing()" class="form">
+    <div formGroupName="messageTypes" class="form-group">
+        <mat-checkbox
+            formControlName="metar"
+            color="primary" 
+            class="message-type">METAR</mat-checkbox>
+        <mat-checkbox
+            formControlName="sigmet"
+            color="primary" 
+            class="message-type">SIGMET</mat-checkbox>
+        <mat-checkbox
+            formControlName="taf_longtaf"
+            color="primary" 
+            class="message-type">TAF</mat-checkbox>
+    </div>
+    <div class="form-group">
+        <mat-form-field class="full-width">
+            <mat-label>ICAO Codes</mat-label>
+            <input 
+                formControlName="airports"
+                matInput 
+                oninput="this.value = this.value.toUpperCase()"
+                placeholder="Ex. LZIB LKPR EGLL ...">
+            <mat-error 
+                *ngIf="airports.errors && airports.errors['invalidCodes']" 
+                class="full-width"
+                >The following ICAO codes are invalid: <strong>{{airports.errors['invalidCodes']}}</strong>.<br>
+                Valid ICAO codes consist of <strong>4 upper-case letters</strong>.
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="form-group">
+        <mat-form-field class="full-width">
+            <mat-label>WMO Codes</mat-label>
+            <input 
+                formControlName="countries"
+                matInput
+                oninput="this.value = this.value.toUpperCase()" 
+                placeholder="Ex. SQ CZ ...">
+            <mat-error 
+                *ngIf="countries.errors && countries.errors['invalidCodes']" 
+                class="full-width"
+                >The following WMO codes are invalid: <strong>{{countries.errors['invalidCodes']}}</strong>.<br>
+                Valid WMO codes consist of <strong>2 upper-case letters</strong>.
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="form-button">
+        <button mat-flat-button color="primary" [disabled]="form.touched && form.invalid">Create Briefing</button>
+    </div>
+</form>
