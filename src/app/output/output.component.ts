@@ -21,7 +21,7 @@ export class OutputComponent implements OnInit {
     this.outputData$ = this.store.select(selectOutputData);
   }
 
-  isGroup(item: GroupHeader): boolean{
+  isGroup(index: any, item: GroupHeader): boolean{
     return item.isGroupBy;
   }
 
