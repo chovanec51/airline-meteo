@@ -1,19 +1,30 @@
 <form [formGroup]="form" (ngSubmit)="onCreateBriefing()" class="form">
-    <div formGroupName="messageTypes" class="form-group">
-        <mat-checkbox
-            formControlName="metar"
-            color="primary" 
-            class="message-type">METAR</mat-checkbox>
-        <mat-checkbox
-            formControlName="sigmet"
-            color="primary" 
-            class="message-type">SIGMET</mat-checkbox>
-        <mat-checkbox
-            formControlName="taf_longtaf"
-            color="primary" 
-            class="message-type">TAF</mat-checkbox>
+    <div formGroupName="messageTypes" class="form-group remove-bottom-margin">
+        <div class="header">Report type:</div>
+        <div class="checkbox-group">
+            <mat-checkbox
+                formControlName="metar"
+                color="primary" 
+                class="message-type">METAR</mat-checkbox>
+            <mat-checkbox
+                formControlName="sigmet"
+                color="primary" 
+                class="message-type">SIGMET</mat-checkbox>
+            <mat-checkbox
+                formControlName="taf_longtaf"
+                color="primary" 
+                class="message-type">TAF</mat-checkbox>
+        </div>
+    </div>
+    <div class="form-error">
+        <mat-error 
+            *ngIf="messageTypes.errors && messageTypes.errors['error']" 
+            class="full-width"
+            >At least <strong>1</strong> report type has to be selected.<br>
+        </mat-error>
     </div>
     <div class="form-group">
+        <div class="header">Airport:</div>
         <mat-form-field class="full-width">
             <mat-label>ICAO Codes</mat-label>
             <input 
@@ -30,12 +41,13 @@
         </mat-form-field>
     </div>
     <div class="form-group">
+        <div class="header">Country:</div>
         <mat-form-field class="full-width">
             <mat-label>WMO Codes</mat-label>
             <input 
                 formControlName="countries"
                 matInput
-                oninput="this.value = this.value.toUpperCase()" 
+                oninput="this.value = this.value.trim().toUpperCase()" 
                 placeholder="Ex. SQ CZ ...">
             <mat-error 
                 *ngIf="countries.errors && countries.errors['invalidCodes']" 
@@ -46,6 +58,13 @@
         </mat-form-field>
     </div>
     <div class="form-button">
-        <button mat-flat-button color="primary" [disabled]="form.touched && form.invalid">Create Briefing</button>
+        <button mat-flat-button color="primary" [disabled]="form.invalid">Create Briefing</button>
+    </div>
+    <div class="form-error">
+        <mat-error 
+            *ngIf="(airports.touched || countries.touched) && form.errors && form.errors['error']" 
+            class="full-width"
+            >You have to enter at least <strong>1</strong> airport or country.<br>
+        </mat-error>
     </div>
 </form>

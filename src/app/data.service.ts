@@ -3,18 +3,19 @@ import { Injectable } from '@angular/core';
 import { InputData } from './shared/model/input-data.model';
 import { RequestQuery } from './shared/model/request-query.model';
 import { RequestQueryParams } from './shared/model/request-query-params.model';
-import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { OPMETResponse } from './shared/model/opmet-response.model';
+import { Store } from '@ngrx/store';
+import { fillReport } from './shared/store/report.actions';
+import { GroupedRows } from './shared/model/group.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
   private _url: string = 'https://ogcie.iblsoft.com/ria/opmetquery';
-  subject = new BehaviorSubject<OPMETResponse | null>(null);
 
-  constructor(private _http: HttpClient, private router: Router) { }
+  constructor(private _http: HttpClient, private router: Router, private store: Store) { }
 
   fetchData(userInput: InputData) {
     const queryObj: RequestQuery = {
@@ -25,7 +26,17 @@ export class DataService {
 
     this._http.post<OPMETResponse>(this._url, queryObj).subscribe({
       next: response => {
-        this.subject.next(response);
+        const groupedData: GroupedRows = {};
+
+        for (const resultRow of response.result) {
+          if (groupedData[resultRow.stationId]) {
+            groupedData[resultRow.stationId].push(resultRow);
+          }
+          else {
+            groupedData[resultRow.stationId] = [resultRow]
+          }
+        }
+        this.store.dispatch(fillReport({reportData: groupedData}));
         this.router.navigate(['/output']);
       }
     });

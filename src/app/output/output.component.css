@@ -7,3 +7,18 @@ table {
     margin: 0; 
     text-align: center;
   }
+
+  .group-row {
+    background-color: rgb(139, 146, 248);
+  }
+
+  .column-header {
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .button-container {
+    width: fit-content;
+    margin: auto;
+    margin-top: 20px;
+  }

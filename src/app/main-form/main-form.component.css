@@ -1,3 +1,7 @@
+form {
+    margin: auto;
+}
+
 .message-type {
     margin: 0 12px;
 }
@@ -21,3 +25,25 @@
     width: 100%;
 }
 
+.form-error {
+    margin-top: 0;
+    margin-left: 40px;
+    font-size: 0.8rem;
+}
+
+.remove-bottom-margin {
+    margin-bottom: 0;
+}
+
+.checkbox-group {
+    background-color: rgb(233, 233, 233);
+    border-bottom: 1px black solid;
+}
+  
+.header {
+    font-size: 1.2rem;
+    width: fit-content;
+    color:white;
+    background:rgb(67, 76, 206);
+    padding:2px 10px;
+}

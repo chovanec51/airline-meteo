@@ -8,10 +8,10 @@ export function validCodesValidator(codeRegex: RegExp): ValidatorFn {
             return null;
     
         const invalidCodes: string[] = [];
-        const codes: string[] = (control.value as string).split(' ');
+        const codes: string[] = (control.value as string).trim().split(' ');
         
         for (const code of codes) {
-            if (code.toUpperCase().match(codeRegex) === null)
+            if (code.trim().match(codeRegex) === null)
                 invalidCodes.push(code);
         }
         

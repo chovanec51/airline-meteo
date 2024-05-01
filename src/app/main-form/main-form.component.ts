@@ -24,7 +24,7 @@ export class MainFormComponent {
             taf_longtaf: []
           },
           {
-            validators: [requiredFieldGroupValidator(['metar', 'sigmet', 'taf'])],
+            validators: [requiredFieldGroupValidator(['metar', 'sigmet', 'taf_longtaf'])],
             updateOn: 'change'
           }
         ),
@@ -44,10 +44,10 @@ export class MainFormComponent {
     }
 
     if (this.airports.value)
-      formData.stations = this.airports.value.split(' ');
+      formData.stations = this.airports.value.trim().split(' ');
     
     if (this.countries.value)
-      formData.countries = this.countries.value.split(' ');
+      formData.countries = this.countries.value.trim().split(' ');
 
     this.dataService.fetchData(formData);
   }

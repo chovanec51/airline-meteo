@@ -1,0 +1,12 @@
+.header-bar {
+    height: 50px; 
+    background-color: rgb(67, 76, 206); 
+    color: white; 
+    font-weight: bold; 
+    align-content: center;
+}
+
+.header-bar h2 {
+    margin: auto;
+    margin-left: 50px;
+}

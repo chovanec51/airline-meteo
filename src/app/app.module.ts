@@ -9,6 +9,8 @@ import { MainFormComponent } from './main-form/main-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { OutputComponent } from './output/output.component';
+import { StoreModule } from '@ngrx/store';
+import { ReportReducer } from './shared/store/report.reducer';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,10 @@ import { OutputComponent } from './output/output.component';
     AppRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot({
+      reportData: ReportReducer
+    })
   ],
   providers: [
     provideAnimationsAsync()
